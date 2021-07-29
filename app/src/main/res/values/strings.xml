@@ -9,4 +9,6 @@
     <string name="message"> Message: %1$s</string>
     <string name="authorName"> Author: %1$s</string>
     <string name="date"> Date: %1$s</string>
+    <string name="e_g_xgicha">e.g xGiCha</string>
+    <string name="e_g_imdbmovies">e.g imdbMovies</string>
 </resources>

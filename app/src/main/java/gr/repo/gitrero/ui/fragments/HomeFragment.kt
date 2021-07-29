@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import gr.repo.gitrero.R
 import gr.repo.gitrero.models.repository.Repo
+import gr.repo.gitrero.util.Constants.Companion.ERROR
+import gr.repo.gitrero.util.NetworkResult
 import gr.repo.gitrero.util.hideKeyboard
 import gr.repo.gitrero.viewmodels.RepoViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
 
     private lateinit var repoViewModel: RepoViewModel
-    private var mRepo: Repo?= null
+    private var mRepo: Repo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
         setUpObservers()
         setUpListeners()
     }
@@ -51,39 +52,37 @@ class HomeFragment : Fragment() {
 
         nextBtn.setOnClickListener {
             repoViewModel.getRepositories(ownerTxtV.text.toString(), repositoryTxtV.text.toString())
-
         }
-
     }
 
     private fun setUpObservers() {
         repoViewModel.repos.observe(viewLifecycleOwner, Observer {
-            println("dsfsdfsd ${it.data}")
-            it.data?.let { repo ->
-                mRepo = repo
-                val fullRepoPath = "${ownerTxtV.text}/${repositoryTxtV.text}"
-                if(mRepo?.fullName == fullRepoPath){
-                    mRepo?.let {
-                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
-                            it.id.toString(), owner = it.owner.login, repositoryName = it.name))
-                    }
-                    errorTxtV.visibility = View.GONE
-                }else{
+            when (it.message) {
+                ERROR -> {
                     errorTxtV.visibility = View.VISIBLE
                 }
+                else -> {
+                    it.data?.let { repo ->
+                        mRepo = repo
+                        val fullRepoPath = "${ownerTxtV.text}/${repositoryTxtV.text}"
+                        if (mRepo?.fullName == fullRepoPath) {
+                            mRepo?.let {
+                                findNavController().navigate(
+                                    HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
+                                        it.id.toString(),
+                                        owner = it.owner.login,
+                                        repositoryName = it.name
+                                    )
+                                )
+                            }
+                            errorTxtV.visibility = View.GONE
+                        } else {
+                            errorTxtV.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
+
         })
     }
-
-    private fun initViews() {
-
-
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
 }

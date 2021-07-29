@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import gr.repo.gitrero.data.Repository
 import gr.repo.gitrero.models.commits.Commits
 import gr.repo.gitrero.models.repository.Repo
+import gr.repo.gitrero.util.Constants.Companion.ERROR
 import gr.repo.gitrero.util.NetworkResult
 import gr.repo.gitrero.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +21,6 @@ class RepoViewModel @ViewModelInject constructor(
     var repos: SingleLiveEvent<NetworkResult<Repo>> = SingleLiveEvent()
     var commits: SingleLiveEvent<NetworkResult<Commits>> = SingleLiveEvent()
 
-//    private var movieList: LiveData<PagedList<Movie>>? = null
-
     fun getRepositories(owner: String, repo: String){
         viewModelScope.launch(Dispatchers.Default) {
             runCatching {
@@ -34,7 +33,7 @@ class RepoViewModel @ViewModelInject constructor(
                         repos.postValue(NetworkResult.Success(it))
                     }
                 }else{
-                    repos.postValue(NetworkResult.Error("something went wrong"))
+                    repos.postValue(NetworkResult.Error(ERROR))
                 }
             }
         }
@@ -58,22 +57,6 @@ class RepoViewModel @ViewModelInject constructor(
         }
     }
 
-//    private val config = PagedList.Config.Builder()
-//        .setPageSize(20)
-//        .setInitialLoadSizeHint(20)
-//        .setEnablePlaceholders(false)
-//        .build()
-//
-//    fun getMovieList(mode: Int, searchQuery: String):  LiveData<PagedList<Movie>>?{
-//        movieList = initializedPagedListBuilder(config, mode, searchQuery).build()
-//        return movieList
-//    }
-//
-//    private fun initializedPagedListBuilder(config: PagedList.Config, mode: Int, searchQuery: String): LivePagedListBuilder<Int, Movie> {
-//        val dataSourceFactory = MoviesDataSourceFactory(viewModelScope, repository, mode, searchQuery)
-//        return LivePagedListBuilder<Int, Movie>(dataSourceFactory, config)
-//    }
-//
 //    /** ROOM DATABASE */
 //    val readMovies: LiveData<List<MoviesEntity>> = repository.local.readMovies().asLiveData()
 //

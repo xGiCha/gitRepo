@@ -15,7 +15,6 @@ import java.util.*
 
 object BindingAdapters {
 
-
     @BindingAdapter("id")
     @JvmStatic
     fun TextView.id(id: String) {

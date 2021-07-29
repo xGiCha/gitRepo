@@ -11,6 +11,8 @@ class Constants {
         const val MOVIES_TABLE = "movies_table"
 
 
+        const val ERROR = "something_went_wrong"
+
     }
 
 }
