@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GitRero</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_message">Τα στοιχεία που έδωσες είναι λάθος. Προσπαθησε ξανά.</string>
+    <string name="submit">Επιβεβαίωση</string>
+    <string name="repo_id"> ID: %1$s</string>
+    <string name="sha_t"> Sha: %1$s</string>
+    <string name="message"> Message: %1$s</string>
+    <string name="authorName"> Author: %1$s</string>
+    <string name="date"> Date: %1$s</string>
+</resources>

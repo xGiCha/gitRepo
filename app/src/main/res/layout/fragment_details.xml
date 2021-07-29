@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repoId"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightGray"
+        android:padding="24dp"
+        tools:context=".DetailsFragment">
+
+        <TextView
+            android:id="@+id/repoIdTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_backgroud"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            app:id="@{repoId}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ID: 123456" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commitsRV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:visibility="visible"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repoIdTxtV"
+            tools:itemCount="3"
+            tools:listitem="@layout/commit_item"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="commit"
+            type="gr.repo.gitrero.models.commits.CommitsItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_backgroud_light_gray">
+
+        <TextView
+            android:id="@+id/shaTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Sha: 123456789"
+            app:rvItem="@{commit.sha}"
+            app:text="@{@string/sha_t}"
+            android:textAppearance="@style/text"/>
+
+        <TextView
+            android:id="@+id/messageTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Message: first commit"
+            app:rvItem="@{commit.commit.message}"
+            app:text="@{@string/message}"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/text"/>
+
+        <TextView
+            android:id="@+id/authorTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="author: xGiCha"
+            app:rvItem="@{commit.commit.author.name}"
+            app:text="@{@string/authorName}"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/text"/>
+
+        <TextView
+            android:id="@+id/dateTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="date: 12/12/12"
+            app:rvItemDate="@{commit.commit.author.date}"
+            app:text="@{@string/date}"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/text"/>
+
+    </LinearLayout>
+</layout>
