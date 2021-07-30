@@ -25,7 +25,8 @@
             android:inputType="textNoSuggestions"
             android:singleLine="true"
             android:padding="16dp"
-            android:hint="@string/e_g_xgicha"/>
+            android:hint="@string/e_g_xgicha"
+            android:text="xGiCha"/>
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/repositoryTxtV"
@@ -36,7 +37,8 @@
             android:inputType="textNoSuggestions"
             android:layout_marginTop="16dp"
             android:padding="16dp"
-            android:hint="@string/e_g_imdbmovies"/>
+            android:hint="@string/e_g_imdbmovies"
+            android:text="imdbMovies"/>
 
         <TextView
             android:id="@+id/errorTxtV"

@@ -35,3 +35,13 @@ fun formatStringDateShort(date: String): String {
     val newDateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
     return newDateFormat.format(oldDate!!)
 }
+
+fun stringToDate(date: String?): Date {
+    val formater = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    return formater.parse(date)
+}
+
+fun formatDateShort(date: Date): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+    return dateFormat.format(date)
+}
