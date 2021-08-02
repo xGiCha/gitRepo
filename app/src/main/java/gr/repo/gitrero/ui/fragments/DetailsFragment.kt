@@ -62,7 +62,6 @@ class DetailsFragment : Fragment() {
     private fun setUpObservers() {
         repoViewModel.commits.observe(viewLifecycleOwner, Observer {
             it.data?.let {
-                println("asdasd ${it}")
                 adapter.updateItems(it)
                 val reposEntity = ReposEntity(it, "$ownerName/$repositoryName")
                 repoViewModel.insertCommits(reposEntity)
@@ -78,6 +77,7 @@ class DetailsFragment : Fragment() {
         readFromDB()
     }
 
+    // if it's already been 5 minutes, make the call from Api, otherwise use the local database
     private fun readFromDB() {
         lifecycleScope.launch {
             repoViewModel.readCommits("$ownerName/$repositoryName").observe(viewLifecycleOwner, Observer {
@@ -91,39 +91,20 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    // compare the two dates
     private fun compareDates(): Int{
         if(commitsList.size > 0){
             commitsList[0].let {
-                val diff = hoursDifference(Date(), stringToDate(it.date))
-                println("aaaaa ${diff}")
+                val diff = calculateTimeDifference(Date(), stringToDate(it.date))
                 return diff
             }
         }
         return -1
     }
 
-    private fun hoursDifference(date1: Date, date2: Date): Int {
+    // checking if the two dates have 5 minutes difference
+    private fun calculateTimeDifference(date1: Date, date2: Date): Int {
         val milliToMinutes : Long = 1000 * 60
         return ((date1.time - date2.time) / milliToMinutes).toInt()
     }
-
-//    override fun onPause() {
-//        super.onPause()
-//        stopUpdates()
-//    }
-//
-//    fun startUpdates() {
-//        stopUpdates()
-//        job = scope.launch(Dispatchers.IO) {
-//            while(true) {
-//                println("asdasdasdasd")
-//                delay(5000)
-//            }
-//        }
-//    }
-//
-//    fun stopUpdates() {
-//        job?.cancel()
-//        job = null
-//    }
 }

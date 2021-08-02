@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import gr.repo.gitrero.R
 import gr.repo.gitrero.models.repository.Repo
 import gr.repo.gitrero.util.Constants.Companion.ERROR
 import gr.repo.gitrero.util.NetworkResult
 import gr.repo.gitrero.util.hideKeyboard
+import gr.repo.gitrero.util.showKeyboard
 import gr.repo.gitrero.viewmodels.RepoViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 
 class HomeFragment : Fragment() {
@@ -82,7 +88,6 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-
         })
     }
 }
